@@ -29,4 +29,8 @@ export const client = {
       contacts: initialContacts,
     }
   },
+  async getContact(contactId: string): Promise<Contact | undefined> {
+    await sleep()
+    return initialContacts.find(contact => contact.id === contactId)
+  },
 }

@@ -16,6 +16,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import Pattern2 from './patterns/custom-queries'
+import Pattern4 from './patterns/parameterized-queries'
 import { Patterns } from './patterns/Patterns'
 import Pattern3 from './patterns/selectors'
 import Pattern1 from './patterns/simple-queries'
@@ -48,11 +49,18 @@ const pattern3 = createRoute({
   component: Pattern3,
 })
 
+const pattern4 = createRoute({
+  path: '/parallel-queries',
+  getParentRoute: () => rootRoute,
+  component: Pattern4,
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   pattern1,
   pattern2,
   pattern3,
+  pattern4,
 ])
 
 const router = createRouter({
