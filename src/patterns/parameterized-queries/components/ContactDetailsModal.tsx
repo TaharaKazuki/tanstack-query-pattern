@@ -9,13 +9,6 @@ type ContactDetailsModalProps = {
   onClose: () => void
 }
 
-const useUrlParameter = () => ({ contactId: '' })
-
-export const ContactsPage = () => {
-  const { contactId } = useUrlParameter()
-  useQuery(getOneContactQueryOptions(contactId))
-}
-
 export const ContactDetailsModal = ({
   contactId,
   onClose,

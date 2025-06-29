@@ -50,7 +50,7 @@ const pattern3 = createRoute({
 })
 
 const pattern4 = createRoute({
-  path: '/parallel-queries',
+  path: '/parameterized-queries',
   getParentRoute: () => rootRoute,
   component: Pattern4,
 })

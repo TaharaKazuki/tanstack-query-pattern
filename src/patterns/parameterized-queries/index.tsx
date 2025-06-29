@@ -1,11 +1,11 @@
-import { ContactsPage, QueryProvider } from '../common'
+import { QueryProvider } from '../common'
 
-import { ContactsTable } from './components/ContactsTable'
+import { ContactsPage } from './components/ContactsPage'
 
 export default function Pattern4() {
   return (
     <QueryProvider>
-      <ContactsPage ContactsTableComponent={ContactsTable} />
+      <ContactsPage />
     </QueryProvider>
   )
 }
