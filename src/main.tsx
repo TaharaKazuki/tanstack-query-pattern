@@ -1,12 +1,9 @@
 import { MantineProvider } from '@mantine/core'
-import '@mantine/core/styles.css'
 import { Notifications } from '@mantine/notifications'
+
+import '@mantine/core/styles.css'
 import '@mantine/notifications/styles.css'
 import './index.css'
-
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { Patterns } from './patterns/Patterns'
 
 import {
   createRootRoute,
@@ -15,7 +12,11 @@ import {
   Outlet,
   RouterProvider,
 } from '@tanstack/react-router'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+
 import Pattern2 from './patterns/custom-queries'
+import { Patterns } from './patterns/Patterns'
 import Pattern1 from './patterns/simple-queries'
 
 const rootRoute = createRootRoute({

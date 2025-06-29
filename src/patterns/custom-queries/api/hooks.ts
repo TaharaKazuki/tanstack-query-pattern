@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { client } from './client'
+
+import { client } from '../../common'
 
 export const useContacts = () =>
   useQuery({

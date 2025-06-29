@@ -1,12 +1,10 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import ContactsPage from './components/ContactsPage'
-
-export const queryClient = new QueryClient()
+import { ContactsPage, QueryProvider } from '../common'
+import { ContactsTable } from './components/ContactsTable'
 
 export default function Pattern1() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ContactsPage />
-    </QueryClientProvider>
+    <QueryProvider>
+      <ContactsPage ContactsTableComponent={ContactsTable} />
+    </QueryProvider>
   )
 }

@@ -1,6 +1,7 @@
 import { Alert, Button, Card, Table } from '@mantine/core'
+
+import { Spinner } from '../../common'
 import { useContacts } from '../api/hooks'
-import { Spinner } from './Spinner'
 
 export const ContactsTable = () => {
   const { data, isPending, isError, refetch } = useContacts()
