@@ -17,6 +17,7 @@ import { createRoot } from 'react-dom/client'
 
 import Pattern2 from './patterns/custom-queries'
 import { Patterns } from './patterns/Patterns'
+import Pattern3 from './patterns/selectors'
 import Pattern1 from './patterns/simple-queries'
 
 const rootRoute = createRootRoute({
@@ -41,7 +42,18 @@ const pattern2 = createRoute({
   component: Pattern2,
 })
 
-const routeTree = rootRoute.addChildren([indexRoute, pattern1, pattern2])
+const pattern3 = createRoute({
+  path: '/selectors',
+  getParentRoute: () => rootRoute,
+  component: Pattern3,
+})
+
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  pattern1,
+  pattern2,
+  pattern3,
+])
 
 const router = createRouter({
   routeTree,
