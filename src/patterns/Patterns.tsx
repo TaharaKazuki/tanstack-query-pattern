@@ -7,6 +7,9 @@ export function Patterns() {
       <Link to={'/simple-queries'}>
         <li>simple-queries</li>
       </Link>
+      <Link to={'/custom-queries'}>
+        <li>custom-queries</li>
+      </Link>
     </>
   )
 }

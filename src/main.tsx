@@ -15,6 +15,7 @@ import {
   Outlet,
   RouterProvider,
 } from '@tanstack/react-router'
+import Pattern2 from './patterns/custom-queries'
 import Pattern1 from './patterns/simple-queries'
 
 const rootRoute = createRootRoute({
@@ -33,7 +34,13 @@ const pattern1 = createRoute({
   component: Pattern1,
 })
 
-const routeTree = rootRoute.addChildren([indexRoute, pattern1])
+const pattern2 = createRoute({
+  path: '/custom-queries',
+  getParentRoute: () => rootRoute,
+  component: Pattern2,
+})
+
+const routeTree = rootRoute.addChildren([indexRoute, pattern1, pattern2])
 
 const router = createRouter({
   routeTree,
