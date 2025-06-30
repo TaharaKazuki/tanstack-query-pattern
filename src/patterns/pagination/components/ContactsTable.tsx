@@ -1,16 +1,19 @@
-import { Alert, Anchor, Button, Card, Table } from '@mantine/core'
+import { Alert, Anchor, Button, Card, Pagination, Table } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 
 import { Spinner } from '../../common'
-import { getContactsQueryOptions } from '../api/query'
+import { getContactsPaginatedQueryOptions } from '../api/query'
 
 type ContactsTableProps = {
   onContactClick: (contactId: string) => void
 }
 
 export const ContactsTable = ({ onContactClick }: ContactsTableProps) => {
+  const [page, setPage] = useState(1)
+
   const { data, isPending, isError, refetch } = useQuery(
-    getContactsQueryOptions
+    getContactsPaginatedQueryOptions(page, 20)
   )
 
   if (isPending)
@@ -48,6 +51,12 @@ export const ContactsTable = ({ onContactClick }: ContactsTableProps) => {
           ))}
         </Table.Tbody>
       </Table>
+      <Pagination
+        total={data.pagination.pageCount}
+        value={page}
+        onChange={setPage}
+        className="mx-auto"
+      />
     </Card>
   )
 }

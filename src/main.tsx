@@ -16,6 +16,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import Pattern2 from './patterns/custom-queries'
+import Pattern5 from './patterns/pagination'
 import Pattern4 from './patterns/parameterized-queries'
 import { Patterns } from './patterns/Patterns'
 import Pattern3 from './patterns/selectors'
@@ -58,7 +59,7 @@ const pattern4 = createRoute({
 const pattern5 = createRoute({
   path: '/pagination',
   getParentRoute: () => rootRoute,
-  component: Pattern4,
+  component: Pattern5,
 })
 
 const routeTree = rootRoute.addChildren([

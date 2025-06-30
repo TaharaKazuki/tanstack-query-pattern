@@ -7,6 +7,12 @@ export const getContactsQueryOptions = queryOptions({
   queryFn: () => client.getContacts(),
 })
 
+export const getContactsPaginatedQueryOptions = (page: number, count: number) =>
+  queryOptions({
+    queryKey: ['contacts', 'list', { page }, { count }],
+    queryFn: () => client.getContactsPaginated(page, count),
+  })
+
 export const getOneContactQueryOptions = (contactId?: string) =>
   queryOptions({
     queryKey: ['contacts', 'one', contactId],
