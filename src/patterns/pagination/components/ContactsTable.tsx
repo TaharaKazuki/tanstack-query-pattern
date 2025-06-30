@@ -1,4 +1,12 @@
-import { Alert, Anchor, Button, Card, Pagination, Table } from '@mantine/core'
+import {
+  Alert,
+  Anchor,
+  Button,
+  Card,
+  Loader,
+  Pagination,
+  Table,
+} from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 
@@ -12,14 +20,14 @@ type ContactsTableProps = {
 export const ContactsTable = ({ onContactClick }: ContactsTableProps) => {
   const [page, setPage] = useState(1)
 
-  const { data, isPending, isError, refetch } = useQuery(
-    getContactsPaginatedQueryOptions(page, 20)
-  )
+  const { data, isPending, isError, refetch, isFetching, isPlaceholderData } =
+    useQuery(getContactsPaginatedQueryOptions(page, 20))
 
-  if (isPending)
+  // 初回ロード時のみSpinnerを表示
+  if (isPending && !isPlaceholderData)
     return (
       <Card withBorder radius={'md'} shadow="md" m="sm">
-        {isPending && <Spinner />}
+        <Spinner />
       </Card>
     )
 
@@ -56,7 +64,15 @@ export const ContactsTable = ({ onContactClick }: ContactsTableProps) => {
         value={page}
         onChange={setPage}
         className="mx-auto"
+        disabled={isFetching}
       />
+      {isFetching && isPlaceholderData && (
+        <div
+          style={{ opacity: 0.6, pointerEvents: 'none', textAlign: 'center' }}
+        >
+          <Loader size="sm" />
+        </div>
+      )}
     </Card>
   )
 }

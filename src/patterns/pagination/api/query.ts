@@ -1,4 +1,4 @@
-import { queryOptions } from '@tanstack/react-query'
+import { keepPreviousData, queryOptions } from '@tanstack/react-query'
 
 import { client } from '../../common'
 
@@ -11,6 +11,7 @@ export const getContactsPaginatedQueryOptions = (page: number, count: number) =>
   queryOptions({
     queryKey: ['contacts', 'list', { page }, { count }],
     queryFn: () => client.getContactsPaginated(page, count),
+    placeholderData: keepPreviousData,
   })
 
 export const getOneContactQueryOptions = (contactId?: string) =>
