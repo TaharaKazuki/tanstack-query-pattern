@@ -36,7 +36,7 @@ export const client = {
     const { items } = pagination(initialContacts, pageFromCursor + 1, 50)
     return {
       contacts: items,
-      nextCursor: pageFromCursor + 1 + '',
+      nextCursor: `${pageFromCursor + 1}`,
     }
   },
 
