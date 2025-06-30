@@ -55,12 +55,19 @@ const pattern4 = createRoute({
   component: Pattern4,
 })
 
+const pattern5 = createRoute({
+  path: '/pagination',
+  getParentRoute: () => rootRoute,
+  component: Pattern4,
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   pattern1,
   pattern2,
   pattern3,
   pattern4,
+  pattern5,
 ])
 
 const router = createRouter({

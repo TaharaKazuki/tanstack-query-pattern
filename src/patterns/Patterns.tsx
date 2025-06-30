@@ -16,6 +16,9 @@ export function Patterns() {
       <Link to={'/parameterized-queries'}>
         <li>parameterized-queries</li>
       </Link>
+      <Link to={'/pagination'}>
+        <li>pagination</li>
+      </Link>
     </>
   )
 }
