@@ -14,7 +14,7 @@ export type GetContactsResponse = {
 
 const sleep = () => new Promise(resolve => setTimeout(resolve, 500))
 
-const initialContacts = new Array(50).fill(0).map(() => ({
+const initialContacts = new Array(500).fill(0).map(() => ({
   id: faker.string.uuid(),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),

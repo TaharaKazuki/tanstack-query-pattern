@@ -22,6 +22,9 @@ export function Patterns() {
       <Link to={'/disabling-queries'}>
         <li>disabling-queries</li>
       </Link>
+      <Link to={'/prefetching'}>
+        <li>prefetching</li>
+      </Link>
     </>
   )
 }

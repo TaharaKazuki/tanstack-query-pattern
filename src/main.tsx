@@ -19,6 +19,7 @@ import Pattern2 from './patterns/custom-queries'
 import Pattern5 from './patterns/pagination'
 import Pattern4 from './patterns/parameterized-queries'
 import { Patterns } from './patterns/Patterns'
+import Pattern7 from './patterns/prefetching'
 import Pattern3 from './patterns/selectors'
 import Pattern1 from './patterns/simple-queries'
 
@@ -68,6 +69,12 @@ const pattern6 = createRoute({
   component: Pattern4,
 })
 
+const pattern7 = createRoute({
+  path: '/prefetching',
+  getParentRoute: () => rootRoute,
+  component: Pattern7,
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   pattern1,
@@ -76,6 +83,7 @@ const routeTree = rootRoute.addChildren([
   pattern4,
   pattern5,
   pattern6,
+  pattern7,
 ])
 
 const router = createRouter({
