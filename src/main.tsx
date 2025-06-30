@@ -1,10 +1,9 @@
-import { MantineProvider } from '@mantine/core'
-import { Notifications } from '@mantine/notifications'
-
 import '@mantine/core/styles.css'
 import '@mantine/notifications/styles.css'
 import './index.css'
 
+import { MantineProvider } from '@mantine/core'
+import { Notifications } from '@mantine/notifications'
 import {
   createRootRoute,
   createRoute,
@@ -22,6 +21,7 @@ import Pattern4 from './patterns/parameterized-queries'
 import { Patterns } from './patterns/Patterns'
 import Pattern7 from './patterns/prefetching'
 import Pattern3 from './patterns/selectors'
+import Pattern9 from './patterns/simple-mutations'
 import Pattern1 from './patterns/simple-queries'
 
 const rootRoute = createRootRoute({
@@ -82,6 +82,12 @@ const pattern8 = createRoute({
   component: Pattern8,
 })
 
+const pattern9 = createRoute({
+  path: '/simple-mutations',
+  getParentRoute: () => rootRoute,
+  component: Pattern9,
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   pattern1,
@@ -92,6 +98,7 @@ const routeTree = rootRoute.addChildren([
   pattern6,
   pattern7,
   pattern8,
+  pattern9,
 ])
 
 const router = createRouter({

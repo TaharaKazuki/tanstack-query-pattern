@@ -28,6 +28,9 @@ export function Patterns() {
       <Link to={'/infinite-queries'}>
         <li>infinite-queries</li>
       </Link>
+      <Link to={'/simple-mutations'}>
+        <li>simple-mutations</li>
+      </Link>
     </>
   )
 }
