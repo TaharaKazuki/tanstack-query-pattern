@@ -45,26 +45,18 @@ function saveContacts(updatedContacts: Contact[]) {
 // Contacts are loaded once and used throughout
 let contacts = loadContacts()
 
-const initialContacts = new Array(500).fill(0).map(() => ({
-  id: faker.string.uuid(),
-  firstName: faker.person.firstName(),
-  lastName: faker.person.lastName(),
-  phoneNumber: faker.phone.number({ style: 'international' }),
-  address: faker.location.secondaryAddress(),
-}))
-
 export const client = {
   async getContacts(): Promise<GetContactsResponse> {
     await sleep()
     return {
-      contacts: initialContacts,
+      contacts: contacts,
     }
   },
 
   async getContactsInfinite({ cursor }: { cursor: string | undefined }) {
     await sleep()
     const pageFromCursor = cursor === undefined ? 1 : Number(cursor)
-    const { items } = pagination(initialContacts, pageFromCursor + 1, 50)
+    const { items } = pagination(contacts, pageFromCursor + 1, 50)
     return {
       contacts: items,
       nextCursor: `${pageFromCursor + 1}`,
@@ -73,11 +65,7 @@ export const client = {
 
   async getContactsPaginated(page: number, count: number) {
     await sleep()
-    const { items, hasNextPage, pageCount } = pagination(
-      initialContacts,
-      page,
-      count
-    )
+    const { items, hasNextPage, pageCount } = pagination(contacts, page, count)
     return {
       contacts: items,
       pagination: {
@@ -89,7 +77,7 @@ export const client = {
 
   async getContact(contactId: string): Promise<Contact | undefined> {
     await sleep()
-    return initialContacts.find(contact => contact.id === contactId)
+    return contacts.find(contact => contact.id === contactId)
   },
 
   async deleteContact(contactId: string) {

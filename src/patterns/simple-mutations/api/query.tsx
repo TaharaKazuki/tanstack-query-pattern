@@ -6,7 +6,7 @@ import {
   useMutation,
 } from '@tanstack/react-query'
 
-import { client } from '../../common'
+import { client, queryClient } from '../../common'
 
 const queryKeys = {
   all: () => ['contacts'],
@@ -42,19 +42,22 @@ export const getOneContactQueryOptions = (contactId?: string) =>
     enabled: contactId !== undefined,
   })
 
-export const useDeleteContact = () =>
-  useMutation({
+export const useDeleteContact = () => {
+  return useMutation({
     mutationFn: (contactId: string) => client.deleteContact(contactId),
-    onSuccess: () =>
+    onSuccess: () => {
       notifications.show({
         icon: <IconCircleCheckFilled />,
         color: 'green',
         message: 'Contact deleted',
-      }),
+      })
+    },
     onError: () =>
       notifications.show({
         icon: <IconCircleXFilled />,
         color: 'red',
         message: 'Error deleting contact',
       }),
+    onSettled: () => queryClient.refetchQueries({ queryKey: queryKeys.all() }),
   })
+}
