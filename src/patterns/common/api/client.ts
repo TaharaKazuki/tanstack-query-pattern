@@ -29,8 +29,34 @@ export const client = {
       contacts: initialContacts,
     }
   },
+
+  async getContactsPaginated(page: number, count: number) {
+    await sleep()
+    const { items, hasNextPage, pageCount } = pagination(
+      initialContacts,
+      page,
+      count
+    )
+    return {
+      contacts: items,
+      pagination: {
+        hasNextPage,
+        pageCount,
+      },
+    }
+  },
+
   async getContact(contactId: string): Promise<Contact | undefined> {
     await sleep()
     return initialContacts.find(contact => contact.id === contactId)
   },
+}
+
+const pagination = <T>(items: T[], page: number, count: number) => {
+  const start = (page - 1) * count
+  const end = start + count
+  const paginatedItems = items.slice(start, end)
+  const pageCount = Math.ceil(items.length / count)
+  const hasNextPage = page < pageCount
+  return { items: paginatedItems, hasNextPage, pageCount }
 }
