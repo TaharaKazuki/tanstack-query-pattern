@@ -4,7 +4,7 @@ import { client } from '../../common'
 
 const queryKeys = {
   all: () => ['contacts'],
-  getContacts: (page: number, count: number) => [
+  getContacts: (page?: number, count?: number) => [
     ...queryKeys.all(),
     'list',
     { page },
@@ -18,7 +18,7 @@ const queryKeys = {
 }
 
 export const getContactsQueryOptions = queryOptions({
-  queryKey: ['contacts', 'list'],
+  queryKey: queryKeys.getContacts(),
   queryFn: () => client.getContacts(),
 })
 
