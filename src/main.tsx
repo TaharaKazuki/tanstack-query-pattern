@@ -62,6 +62,12 @@ const pattern5 = createRoute({
   component: Pattern5,
 })
 
+const pattern6 = createRoute({
+  path: '/disabling-queries',
+  getParentRoute: () => rootRoute,
+  component: Pattern4,
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   pattern1,
@@ -69,6 +75,7 @@ const routeTree = rootRoute.addChildren([
   pattern3,
   pattern4,
   pattern5,
+  pattern6,
 ])
 
 const router = createRouter({

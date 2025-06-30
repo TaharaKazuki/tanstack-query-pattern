@@ -19,6 +19,9 @@ export function Patterns() {
       <Link to={'/pagination'}>
         <li>pagination</li>
       </Link>
+      <Link to={'/disabling-queries'}>
+        <li>disabling-queries</li>
+      </Link>
     </>
   )
 }

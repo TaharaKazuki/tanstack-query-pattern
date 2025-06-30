@@ -1,5 +1,6 @@
 import { Alert, Anchor, Button, Card, Table } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 
 import { Spinner } from '../../common'
 import { getContactsQueryOptions } from '../api/query'
@@ -9,9 +10,19 @@ type ContactsTableProps = {
 }
 
 export const ContactsTable = ({ onContactClick }: ContactsTableProps) => {
-  const { data, isPending, isError, refetch } = useQuery(
-    getContactsQueryOptions
-  )
+  const [isEnabled, setIsEnabled] = useState(false)
+
+  const { data, isPending, isError, refetch } = useQuery({
+    ...getContactsQueryOptions,
+    enabled: isEnabled,
+  })
+
+  if (!isEnabled)
+    return (
+      <Card withBorder radius={'md'} shadow="md" m="sm">
+        <Button onClick={() => setIsEnabled(true)}>Load Contacts</Button>
+      </Card>
+    )
 
   if (isPending)
     return (
