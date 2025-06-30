@@ -40,7 +40,13 @@ export const ContactsTable = ({ onContactClick }: ContactsTableProps) => {
       </Alert>
     )
   return (
-    <Card withBorder radius={'md'} shadow="md" m="sm">
+    <Card
+      withBorder
+      radius={'md'}
+      shadow="md"
+      m="sm"
+      style={{ position: 'relative' }}
+    >
       <Table>
         <Table.Thead>
           <Table.Tr>
@@ -68,7 +74,19 @@ export const ContactsTable = ({ onContactClick }: ContactsTableProps) => {
       />
       {isFetching && isPlaceholderData && (
         <div
-          style={{ opacity: 0.6, pointerEvents: 'none', textAlign: 'center' }}
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 10,
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            borderRadius: '50%',
+            padding: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
         >
           <Loader size="sm" />
         </div>
