@@ -16,6 +16,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import Pattern2 from './patterns/custom-queries'
+import Pattern8 from './patterns/infinite-queries'
 import Pattern5 from './patterns/pagination'
 import Pattern4 from './patterns/parameterized-queries'
 import { Patterns } from './patterns/Patterns'
@@ -75,6 +76,12 @@ const pattern7 = createRoute({
   component: Pattern7,
 })
 
+const pattern8 = createRoute({
+  path: '/infinite-queries',
+  getParentRoute: () => rootRoute,
+  component: Pattern8,
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   pattern1,
@@ -84,6 +91,7 @@ const routeTree = rootRoute.addChildren([
   pattern5,
   pattern6,
   pattern7,
+  pattern8,
 ])
 
 const router = createRouter({

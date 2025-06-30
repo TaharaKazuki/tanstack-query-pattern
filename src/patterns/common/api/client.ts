@@ -30,6 +30,16 @@ export const client = {
     }
   },
 
+  async getContactsInfinite({ cursor }: { cursor: string | undefined }) {
+    await sleep()
+    const pageFromCursor = cursor === undefined ? 1 : Number(cursor)
+    const { items } = pagination(initialContacts, pageFromCursor + 1, 50)
+    return {
+      contacts: items,
+      nextCursor: pageFromCursor + 1 + '',
+    }
+  },
+
   async getContactsPaginated(page: number, count: number) {
     await sleep()
     const { items, hasNextPage, pageCount } = pagination(

@@ -1,26 +1,22 @@
-import { Alert, Anchor, Button, Card, Pagination, Table } from '@mantine/core'
-import { useQuery, usePrefetchQuery } from '@tanstack/react-query'
-import { useState, useEffect } from 'react'
+import { Alert, Anchor, Button, Card, Center, Table } from '@mantine/core'
+import { useInfiniteQuery } from '@tanstack/react-query'
 
 import { Spinner } from '../../common'
-import { getContactsPaginatedQueryOptions } from '../api/query'
+import { contactsInfiniteQueryOptions } from '../api/query'
 
 type ContactsTableProps = {
   onContactClick: (contactId: string) => void
 }
 
 export const ContactsTable = ({ onContactClick }: ContactsTableProps) => {
-  const [page, setPage] = useState(1)
-
-  const { data, isPending, isError, refetch } = useQuery(
-    getContactsPaginatedQueryOptions(page, 20)
-  )
-
-  usePrefetchQuery(getContactsPaginatedQueryOptions(page + 1, 20))
-
-  useEffect(() => {
-    console.log(`🔄 Page changed to ${page}, prefetching page ${page + 1}`)
-  }, [page])
+  const {
+    data,
+    isPending,
+    isError,
+    refetch,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery(contactsInfiniteQueryOptions)
 
   if (isPending)
     return (
@@ -38,13 +34,7 @@ export const ContactsTable = ({ onContactClick }: ContactsTableProps) => {
       </Alert>
     )
   return (
-    <Card
-      withBorder
-      radius={'md'}
-      shadow="md"
-      m="sm"
-      style={{ position: 'relative' }}
-    >
+    <Card withBorder radius={'md'} shadow="md" m="sm">
       <Table>
         <Table.Thead>
           <Table.Tr>
@@ -52,23 +42,28 @@ export const ContactsTable = ({ onContactClick }: ContactsTableProps) => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          {data.contacts.map(contact => (
-            <Table.Tr key={contact.id}>
-              <Table.Td>
-                <Anchor onClick={() => onContactClick(contact.id)}>
-                  {contact.firstName + ' ' + contact.lastName}
-                </Anchor>
-              </Table.Td>
-            </Table.Tr>
-          ))}
+          {data.pages
+            .flatMap(page => page.contacts)
+            .map(contact => (
+              <Table.Tr key={contact.id}>
+                <Table.Td>
+                  <Anchor onClick={() => onContactClick(contact.id)}>
+                    {contact.firstName + ' ' + contact.lastName}
+                  </Anchor>
+                </Table.Td>
+              </Table.Tr>
+            ))}
         </Table.Tbody>
+        <Center>
+          <Button
+            onClick={() => fetchNextPage()}
+            loading={isFetchingNextPage}
+            variant="subtle"
+          >
+            Load more
+          </Button>
+        </Center>
       </Table>
-      <Pagination
-        total={data.pagination.pageCount}
-        value={page}
-        onChange={setPage}
-        className="mx-auto"
-      />
     </Card>
   )
 }

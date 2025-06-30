@@ -1,4 +1,8 @@
-import { keepPreviousData, queryOptions } from '@tanstack/react-query'
+import {
+  infiniteQueryOptions,
+  keepPreviousData,
+  queryOptions,
+} from '@tanstack/react-query'
 
 import { client } from '../../common'
 
@@ -20,3 +24,10 @@ export const getOneContactQueryOptions = (contactId?: string) =>
     queryFn: () => client.getContact(contactId!),
     enabled: contactId !== undefined,
   })
+
+export const contactsInfiniteQueryOptions = infiniteQueryOptions({
+  queryKey: ['contacts', 'list'],
+  queryFn: ({ pageParam }) => client.getContactsInfinite(pageParam),
+  initialPageParam: { cursor: undefined as string | undefined },
+  getNextPageParam: lastPage => ({ cursor: lastPage.nextCursor }),
+})

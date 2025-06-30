@@ -25,6 +25,9 @@ export function Patterns() {
       <Link to={'/prefetching'}>
         <li>prefetching</li>
       </Link>
+      <Link to={'/infinite-queries'}>
+        <li>infinite-queries</li>
+      </Link>
     </>
   )
 }
