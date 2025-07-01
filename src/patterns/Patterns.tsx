@@ -31,6 +31,9 @@ export function Patterns() {
       <Link to={'/simple-mutations'}>
         <li>simple-mutations</li>
       </Link>
+      <Link to={'/automatic-query-invalidation'}>
+        <li>automatic-query-invalidation</li>
+      </Link>
     </>
   )
 }

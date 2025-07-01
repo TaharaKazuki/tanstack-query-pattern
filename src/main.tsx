@@ -14,6 +14,7 @@ import {
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
+import Pattern10 from './patterns/automatic-query-invalidation'
 import Pattern2 from './patterns/custom-queries'
 import Pattern8 from './patterns/infinite-queries'
 import Pattern5 from './patterns/pagination'
@@ -88,6 +89,12 @@ const pattern9 = createRoute({
   component: Pattern9,
 })
 
+const pattern10 = createRoute({
+  path: '/automatic-query-invalidation',
+  getParentRoute: () => rootRoute,
+  component: Pattern10,
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   pattern1,
@@ -99,6 +106,7 @@ const routeTree = rootRoute.addChildren([
   pattern7,
   pattern8,
   pattern9,
+  pattern10,
 ])
 
 const router = createRouter({
